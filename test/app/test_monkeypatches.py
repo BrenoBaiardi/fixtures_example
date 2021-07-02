@@ -1,6 +1,7 @@
 # contents of test_module.py with source code and the test
 import random
 import requests
+import pytest
 
 
 
@@ -25,6 +26,8 @@ def minha_resposta_fake(url: str):
 # só será uma fixture quando for marcado com pytest.fixture
 # ao ser transformado em fixture, poderá ser utilizado em varios testes
 # VERIFICAR SE O MONKEYPATCH É DESFEITO AO FIM DA FIXTURE
+@pytest.fixture()
 def test_fake_pi(monkeypatch):
     monkeypatch.setattr(requests, "get", minha_resposta_fake)
     assert requests.get("https://reqres.in/") == "valor_fake"
+
